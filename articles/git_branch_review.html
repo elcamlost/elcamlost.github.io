@@ -13,7 +13,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script type="text/javascript" async src="https://irassadin.relap.io/api/v6/head.js?token=sMiwDooOV9QpIcjN"></script>
-    <title>Elcamlost.GitHub.io by elcamlost</title>
+    <title>Elcamlost.GitHub.io by elcamlost || Git branch review easy with perl</title>
 </head>
 
 <body>
@@ -28,13 +28,13 @@
 <div id="content-wrapper">
     <div class="inner clearfix">
         <section id="main-content">
-<div class="entry-content">
+<article>
 
 					
 
 						<p>When I review a pull-request with many commits, I want to be able to see all the commits and step back and forth through them.  I used to use a git GUI (or github's web pages), but I hated having to leave the terminal to do that.</p>
 <p>Today I whipped up a Perl program to stage all the commit information into tempfiles and fire up vim on them.  I saved it in my bin path as 'git-review', so I can call it as "git review".  No promises of quality, but I'm sharing it in case anyone wants to steal/adapt it.</p>
-<pre class="brush: perl; title: ; notranslate" title="">
+<code>
 
 #!/usr/bin/env perl
 
@@ -106,20 +106,20 @@ $index-&gt;append( &quot;\ngit diff --stat\n&quot;, scalar capture_stdout { syst
 
 system( &quot;vim&quot;, $index, reverse @files );
 
-</pre>
+</code>
 <p>Now, since I use ingy's <a href="https://github.com/ingydotnet/git-hub">git-hub</a> command line tool, my pull-request review is as easy as this:</p>
-<pre class="brush: plain; title: ; notranslate" title="">
+<code>
 
 $ git hub pr-fetch 27
 
 $ git review PR/27
 
-</pre>
+</code>
 
 
 												
 
-					</div><!-- .entry-content -->
+					</article>
           <div id="relap-widget"><span id='relap-widget-position'></span></div>
         </section>
 
