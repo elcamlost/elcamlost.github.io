@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" async src="https://irassadin.relap.io/api/v6/head.js?token=sMiwDooOV9QpIcjN"></script>
+    <title>Elcamlost.GitHub.io by elcamlost</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Elcamlost.GitHub.io</h1>
+        <h2></h2>
+        <a href="https://github.com/elcamlost" class="button"><small>Follow me on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+	<div class="entry" id="entry-6481">
+                        <h2 class="entry-title">Managing Boilerplate with Import::Base</h2>
+                        
+                        <div class="entry-meta-1 pkg">
+                            <span class="byline">By <a href="http://blogs.perl.org/users/preaction/" class="profile-link">preaction</a></span>
+							<span class="dateline">on <span class="date" title="iso8601">October 26, 2014  6:16 PM</span></span>
+							
+						</div><!-- .entry-meta -->
+                        
+                        <div class="entry-body">
+                            <p>Boilerplate is everything I hate about programming:</p>
+
+<ul>
+<li>Doing the same thing more than once</li>
+<li>Leaving clutter in every file</li>
+<li>Making it harder to change things in the future</li>
+<li>Eventually blindly copying without understanding (cargo-cult programming)</li>
+</ul>
+
+<p>In an effort to reduce some of my boilerplate, I wrote
+<a href="https://metacpan.org/pod/Import::Base">Import::Base</a> a module to collect and
+import useful bundles of modules, removing the need for long lists of <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="pun">...</span></code>
+lines everywhere.</p>
+
+                            <p>As I've grown as a Perl programmer, I've added more and more to my standard
+preamble for all but the most trivial Perl scripts. <code class="prettyprint"><span class="kwd">use</span><span class="pln"> strict</span></code> and <code class="prettyprint"><span class="kwd">use</span><span class="pln"><br>warnings</span></code> are absolute requirements. I want to use modern Perl's features like
+<code class="prettyprint"><span class="pln">say</span></code>, <code class="prettyprint"><span class="pln">state</span></code>, and others, so I'll import a feature bundle with <code class="prettyprint"><span class="kwd">use</span><span class="pln"> feature<br></span><span class="str">":5.10"</span></code>. If I'm working on things I don't plan to share the code on CPAN, I
+can go all the way to <code class="prettyprint"><span class="kwd">use</span><span class="pln"> experimental qw</span><span class="pun">(</span><span class="pln"> signatures postfix_deref </span><span class="pun">)</span></code>.</p>
+
+<p>For class modules, I need to <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Moo</span></code>, <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Types</span><span class="pun">::</span><span class="typ">Standard</span></code>, and more. For
+roles, I need to <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Moo</span><span class="pun">::</span><span class="typ">Role</span></code> instead of Moo. If the project uses Moose, I
+need to use Moose's version of those things instead of Moo's version (or, in
+the case of Type::Tiny, make sure to use a Moo/Moose agnostic pattern).</p>
+
+<p>For tests, I have a lot more. <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Test</span><span class="pun">::</span><span class="typ">More</span></code>, <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Test</span><span class="pun">::</span><span class="typ">Deep</span></code>, and <code class="prettyprint"><span class="kwd">use</span><span class="pln"><br></span><span class="typ">Test</span><span class="pun">::</span><span class="typ">Differences</span></code>, are my go-to comparison set. My best practices also include
+<code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">File</span><span class="pun">::</span><span class="typ">Temp</span></code>, which requires that I <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">File</span><span class="pun">::</span><span class="typ">Spec</span><span class="pun">::</span><span class="typ">Functions</span></code>, and <code class="prettyprint"><span class="kwd">use</span><span class="pln"><br></span><span class="typ">FindBin</span></code> so I can locate the t/share directory for ancillary test files.</p>
+
+<p>For command-line scripts, I have <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Pod</span><span class="pun">::</span><span class="typ">Usage</span><span class="pun">::</span><span class="typ">Return</span></code>, <code class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Getopt</span><span class="pun">::</span><span class="typ">Long</span><span class="pln"><br>qw</span><span class="pun">(</span><span class="pln"> </span><span class="typ">GetOptionsFromArray</span><span class="pln"> </span><span class="pun">)</span></code>, in addition to my standard boilerplate of strict,
+warnings, and features.</p>
+
+<p>And every project I write has imports that are used in just about every module:
+YAML, JSON, Path::Tiny, and project-specific utility modules.</p>
+
+<p>My standard solution was as simple and blunt as it could be: Copy and paste.
+Besides being a stupidly-lazy solution, it left me with a problem: How could I
+modify all my modules to use a new feature bundle? Should I brush up on my
+<code class="prettyprint"><span class="pln">sed</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span></code> or write a Perl one-liner? What happens when I want to use a different
+module with an equivalent API, like changing to use YAML::XS instead of
+YAML::PP? How can I make a new module quickly available to all my classes, or
+all my roles, or all my tests, or all my scripts?</p>
+
+<p>All these questions boiled down to: If I copy/paste my boilerplate everywhere,
+what happens when my boilerplate changes? This is why I hate boilerplate.</p>
+
+<p>With <a href="https://metacpan.org/pod/Import::Into">Import::Into</a>, we have a way to
+remove a massive block of imports from our boilerplate. Using Import::Into, I
+wrote a simple class to manage my imports, and allow me to quickly create
+different bundles of imports to use in different situations:
+<a href="https://metacpan.org/pod/Import::Base">Import::Base</a>.</p>
+
+<p>With Import::Base, you build a list of imports in a module. When someone
+imports your module, they get all your imports. They can also subclass your
+module to add or remove what your module imports.</p>
+
+<p>A common base module should probably include strict, warnings, and a feature
+set.</p>
+
+<pre><code class="prettyprint"><span class="kwd">package</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Base</span><span class="pun">;</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> </span><span class="kwd">base</span><span class="pln"> </span><span class="str">'Import::Base'</span><span class="pun">;</span><span class="pln"><br><br></span><span class="kwd">our</span><span class="pln"> </span><span class="lit">@IMPORT_MODULES</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="str">'strict'</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="str">'warnings'</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; feature </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln">qw</span><span class="pun">(</span><span class="pln"> </span><span class="pun">:</span><span class="lit">5.14</span><span class="pln"> </span><span class="pun">)],</span><span class="pln"><br></span><span class="pun">);</span></code></pre>
+
+<p>Now we can consume our base module by doing:</p>
+
+<pre><code class="prettyprint"><span class="kwd">package</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Module</span><span class="pun">;</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Base</span><span class="pun">;</span></code></pre>
+
+<p>Which is equivalent to:</p>
+
+<pre><code class="prettyprint"><span class="kwd">package</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Module</span><span class="pun">;</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> strict</span><span class="pun">;</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> warnings</span><span class="pun">;</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> feature qw</span><span class="pun">(</span><span class="pln"> </span><span class="pun">:</span><span class="lit">5.14</span><span class="pln"> </span><span class="pun">);</span></code></pre>
+
+<p>Now when we want to change our feature set, we only need to edit one file!</p>
+
+<p>In addition to a set of modules, we can also create optional bundles:</p>
+
+<pre><code class="prettyprint"><span class="kwd">package</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Base</span><span class="pun">;</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> </span><span class="kwd">base</span><span class="pln"> </span><span class="str">'Import::Base'</span><span class="pun">;</span><span class="pln"><br><br></span><span class="com"># Modules that will always be included</span><span class="pln"><br></span><span class="kwd">our</span><span class="pln"> </span><span class="lit">@IMPORT_MODULES</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="str">'strict'</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="str">'warnings'</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; feature </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln">qw</span><span class="pun">(</span><span class="pln"> </span><span class="pun">:</span><span class="lit">5.14</span><span class="pln"> </span><span class="pun">)],</span><span class="pln"><br>&nbsp; &nbsp; experimental </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln">qw</span><span class="pun">(</span><span class="pln"> signatures </span><span class="pun">)],</span><span class="pln"><br></span><span class="pun">);</span><span class="pln"><br><br></span><span class="com"># Named bundles to include</span><span class="pln"><br></span><span class="kwd">our</span><span class="pln"> </span><span class="pun">%</span><span class="pln">IMPORT_BUNDLES </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="typ">Class</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="str">'Moo'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'Types::Standard'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln">qw</span><span class="pun">(</span><span class="pln"> </span><span class="pun">:</span><span class="pln">all </span><span class="pun">)]</span><span class="pln"> </span><span class="pun">],</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="typ">Role</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="str">'Moo::Role'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'Types::Standard'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln">qw</span><span class="pun">(</span><span class="pln"> </span><span class="pun">:</span><span class="pln">all </span><span class="pun">)]</span><span class="pln"> </span><span class="pun">],</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="typ">Test</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln">qw</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Test</span><span class="pun">::</span><span class="typ">More</span><span class="pln"> </span><span class="typ">Test</span><span class="pun">::</span><span class="typ">Deep</span><span class="pln"> </span><span class="pun">)],</span><span class="pln"><br></span><span class="pun">);</span></code></pre>
+
+<p>Now we can choose one or more bundles to include:</p>
+
+<pre><code class="prettyprint"><span class="com"># lib/MyClass.pm</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Base</span><span class="pln"> </span><span class="str">'Class'</span><span class="pun">;</span><span class="pln"><br><br></span><span class="com"># t/mytest.t</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Base</span><span class="pln"> </span><span class="str">'Test'</span><span class="pun">;</span><span class="pln"><br><br></span><span class="com"># t/lib/MyTest.pm</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Base</span><span class="pln"> </span><span class="str">'Test'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'Class'</span><span class="pun">;</span></code></pre>
+
+<p>What makes Import::Base more useful than rolling your own with Import::Into is
+the granular control you can get on the consuming side. On a case-by-case
+basis, individual imports can be removed if they conflict with something in the
+module (a name collision, for example). Then, the offending module can be used
+directly.</p>
+
+<pre><code class="prettyprint"><span class="kwd">package</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">StrangeClass</span><span class="pun">;</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> </span><span class="typ">My</span><span class="pun">::</span><span class="typ">Base</span><span class="pln"> </span><span class="str">'Class'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="pln">exclude </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="str">'Types::Standard'</span><span class="pln"> </span><span class="pun">];</span><span class="pln"><br></span><span class="kwd">use</span><span class="pln"> </span><span class="typ">Types</span><span class="pun">::</span><span class="typ">Standard</span><span class="pln"> qw</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Str</span><span class="pln"> </span><span class="pun">);</span></code></pre>
+
+<p>Boilerplate is everything I hate about programming. With
+<a href="https://metacpan.org/pod/Import::Base">Import::Base</a>, I can remove boilerplate
+and replace it with a single line describing what the module needs.</p>
+
+                        </div><!-- .entry-body -->
+                        
+                        <div class="entry-meta-2 pkg">
+                            <ul>
+                                <li><a href="#comments">7 comments</a></li>
+                                <!-- <li><a href="http://blogs.perl.org/users/preaction/2014/10/managing-boilerplate-with-importbase.html">0 votes</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+        </section>
+
+        <aside id="sidebar">
+
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
