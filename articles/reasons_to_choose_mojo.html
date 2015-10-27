@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <title>Elcamlost.GitHub.io by elcamlost</title>
+</head>
+
+<body>
+<header>
+  <div class="inner">
+    <h1>Elcamlost.GitHub.io</h1>
+    <h2></h2>
+    <a href="https://github.com/elcamlost" class="button"><small>Follow me on</small> GitHub</a>
+  </div>
+</header>
+
+<div id="content-wrapper">
+  <div class="inner clearfix">
+    <section id="main-content">
+      <div class="content">
+
+<h1 id="top" class="page-header">Reasons for choosing Mojolicious</h1>
+<p class="blog-date">Friday, July 10, 2015</p>
+<ul class="toc"><li><a href="#introduction">Introduction</a></li><li><a href="#reason-for-choosing-mojolicious">Reason for choosing Mojolicious</a></li><li><a href="#user-signup--authentication">User Signup / authentication</a></li><li><a href="#order-creation">Order creation</a></li><li><a href="#payment">Payment</a></li><li><a href="#job-acceptance">Job Acceptance</a></li><li><a href="#geolocation-of-assets">Geolocation of assets</a></li><li><a href="#rest">REST</a></li><li><a href="#projects">Projects</a></li><li><a href="#summary">Summary</a></li></ul>
+<h2 id="introduction"><a href="#top">Introduction</a></h2>
+
+<p>This blog post is a response to <a href="http://perlmonks.org/?node_id=1133505">http://perlmonks.org/?node_id=1133505</a>.
+I tried to reply directly, but I got “access denied” for some reason, so I
+decided to write a blog post about it instead.</p>
+
+<p>The post on perlmonks was:</p>
+
+<blockquote>
+  <p>Good day fellow monks,</p>
+
+  <p>I am starting a new project, with a clean slate, this is a wonderful and rare
+delight.</p>
+
+  <p>I need to create a back end web service and being a man of the times, I plan
+to use a REST style API.</p>
+
+  <p>The back end needs to provide User Signup, User Authentication, Order creation,
+Payment, Job Acceptance and Geolocation of assets.</p>
+
+  <p>There will be more, but that’s some of the main features.
+I do not have to write it in Perl, but that is where I know my way the best,
+so I am minded to make it so.</p>
+
+  <p>I have started looking at Mojolicious, but then thought I’d back up a step and
+ask for some advice.</p>
+
+  <p>Is Perl still a good language to use, or am I a dinosaur?
+Is Mojolicious a good way to build a REST service
+What other frameworks would you folk recommend I look at
+Does anyone know of a nice open source project providing some set of the above
+features, that could get me started?
+Any other warnings or guidance from those with experience in REST
+Many thanks for your time </p>
+
+  <p>R.</p>
+</blockquote>
+
+<h2 id="reason-for-choosing-mojolicious"><a href="#top">Reason for choosing Mojolicious</a></h2>
+
+<p>I would go for Mojolicious. It’s a very modern framework that keeps up with
+the specifications of the web. To me, one of the killer features is that it
+supports a non-blocking environment. This means that you can spin up one
+process and serve thousands of requests simultaneously. When that is said,
+non-blocking might be a bit alien in the beginning, so Mojolicious support
+standard blocking programming as well.</p>
+
+<p>Another great feature is the ecosystem: There’s a bunch of
+<a href="https://metacpan.org/search?q=Mojolicious%3A%3APlugin">Mojolicious extensions</a>
+on cpan, and there’s also written quite a few
+<a href="https://metacpan.org/requires/distribution/Mojolicious">Mojo based projects</a>
+as well. Here are the modules I use the most frequent:</p>
+
+<ul>
+  <li><a href="https://metacpan.org/pod/Mojo::Pg">https://metacpan.org/pod/Mojo::Pg</a></li>
+  <li><a href="https://metacpan.org/pod/Mojo::mysql">https://metacpan.org/pod/Mojo::mysql</a></li>
+  <li><a href="https://metacpan.org/pod/Mojolicious::Plugin::AssetPack">https://metacpan.org/pod/Mojolicious::Plugin::AssetPack</a></li>
+  <li><a href="https://metacpan.org/pod/Mojolicious::Plugin::Swagger2">https://metacpan.org/pod/Mojolicious::Plugin::Swagger2</a></li>
+</ul>
+
+<h2 id="user-signup--authentication"><a href="#top">User Signup / authentication</a></h2>
+
+<p>There’s a lot of authentication modules on CPAN, but here is a short list,
+just to give an idea of some of the projects that exists:</p>
+
+<ul>
+  <li><a href="https://metacpan.org/pod/Mojolicious::Plugin::Authentication">https://metacpan.org/pod/Mojolicious::Plugin::Authentication</a></li>
+  <li><a href="https://metacpan.org/pod/Mojolicious::Plugin::Web::Auth">https://metacpan.org/pod/Mojolicious::Plugin::Web::Auth</a></li>
+  <li><a href="https://metacpan.org/pod/Mojolicious::Plugin::OAuth2">https://metacpan.org/pod/Mojolicious::Plugin::OAuth2</a></li>
+  <li>Or just roll your own and use <a href="https://metacpan.org/pod/Mojolicious::Plugin::Bcrypt">https://metacpan.org/pod/Mojolicious::Plugin::Bcrypt</a> for passwords</li>
+</ul>
+
+<h2 id="order-creation"><a href="#top">Order creation</a></h2>
+
+<p>I guess any any ORM or just Mojo::Pg / ::mysql directly will help you out.
+Also, Mojolicious has an <a href="https://metacpan.org/pod/distribution/Mojolicious/lib/Mojolicious/Guides/Rendering.pod#Form-validation">awesome validation</a>
+built in.</p>
+
+<h2 id="payment"><a href="#top">Payment</a></h2>
+
+<p>You can use any of the payment modules on CPAN, but here are two projects I’ve
+written:</p>
+
+<ul>
+  <li><a href="https://metacpan.org/pod/Mojolicious::Plugin::StripePayment">https://metacpan.org/pod/Mojolicious::Plugin::StripePayment</a></li>
+  <li><a href="https://metacpan.org/pod/Mojolicious::Plugin::PayPal">https://metacpan.org/pod/Mojolicious::Plugin::PayPal</a></li>
+</ul>
+
+<p>The good thing about both of those is that they are non-blocking from the
+ground up. The bad thing is that they don’t do more than what I needed at the
+time. Any feedback is greatly appreciated.</p>
+
+<p>I would also recommend going with <a href="https://stripe.com/">https://stripe.com/</a>. Their service is very
+simple to work with.</p>
+
+<h2 id="job-acceptance"><a href="#top">Job Acceptance</a></h2>
+
+<p>Not sure if you’re talking about an object in your backend model or if you’re
+asking for a job queue… If the latter, Mojo has your back:
+<a href="https://metacpan.org/pod/Minion">https://metacpan.org/pod/Minion</a></p>
+
+<h2 id="geolocation-of-assets"><a href="#top">Geolocation of assets</a></h2>
+
+<p>I think I would simply put my application behind <a href="https://www.cloudflare.com/">https://www.cloudflare.com/</a>
+and use their geolocation feature. In addition to being a CDN, they add headers
+with geo information, before sending it to your backend.</p>
+
+<h2 id="rest"><a href="#top">REST</a></h2>
+
+<p>The <a href="https://metacpan.org/pod/Swagger2">Swagger</a> project and the Mojolicious
+plugin makes it a breeze to create RESTful interfaces with input/output
+validation. You can read more about it in my
+<a href="http://thorsen.pm/perl/programming/2015/07/05/mojolicious-swagger2.html">blog post</a>.</p>
+
+<h2 id="projects"><a href="#top">Projects</a></h2>
+
+<p>You could have a look at <a href="https://github.com/mojoconf/MCT">https://github.com/mojoconf/MCT</a>. It does OAuth2,
+payment and has it’s own model to a postgres backend, using Mojo::Pg.</p>
+
+<h2 id="summary"><a href="#top">Summary</a></h2>
+
+<p>I think Mojolicious is a great web framework. If I would choose any other, I
+would probably go for a node or go based framework.</p>
+
+<p>I also don’t think “R” is a dinosaur for choosing Perl. Perl is indeed live
+and kicking and will be for many years ahead.</p>
+
+
+<div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="https://disqus.com/embed/comments/?base=default&amp;version=37f5f4a5507c78996fe9362127826027&amp;f=jhthorsen-github&amp;t_u=http%3A%2F%2Fthorsen.pm%2Fperl%2Fprogramming%2F2015%2F07%2F10%2Fa-restful-backend.html&amp;t_d=Reasons%20for%20choosing%20Mojolicious&amp;t_t=Reasons%20for%20choosing%20Mojolicious&amp;s_o=default" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 591px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+<script type="text/javascript" src="http://disqus.com/forums/jhthorsen-github/embed.js"></script>
+<noscript>&lt;a href="http://jhthorsen-github.disqus.com/?url=ref"&gt;View the discussion thread.&lt;/a&gt;</noscript>
+
+    </div>
