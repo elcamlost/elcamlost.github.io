@@ -1,0 +1,6 @@
+remote_theme: mzlogin/mzlogin.github.io
+side_bar_repo_limit: 3
+timezone: Europe/Moscow
+title: Ilya 'Elcamlost' Rassadin
+description: My blog about modern perl and devops
+email: elcamlost@gmail.com
