@@ -1,4 +1,4 @@
-remote_theme: mzlogin/mzlogin.github.io
+theme: jekyll-theme-architect
 side_bar_repo_limit: 3
 timezone: Europe/Moscow
 title: Ilya 'Elcamlost' Rassadin
