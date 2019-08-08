@@ -1,3 +1,11 @@
+---
+layout: post
+title: Rsyslog и Graylog
+categories: [devops]
+tags: [rsyslog, graylog, logging]
+language: ru
+---
+
 # Rsyslog и Graylog
 
 Обычно, если речь заходит о современных системах сбора, хранения и анализа логов, на ум сразу приходят Graylog или ELK. В нашей компании выбор пал на Graylog (так как, в отличие от ELK или Splunk, мы были с ним немного знакомы).
