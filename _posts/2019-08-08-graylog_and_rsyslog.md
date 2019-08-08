@@ -57,7 +57,7 @@ call graylog
 ruleset(name="graylog") {
   action(
     type="omfwd"
-    Target="graylog.cetera.ru"
+    Target="graylog.example.com"
     Port="12201"
     Protocol="tcp"
     KeepAlive="on"
@@ -65,7 +65,7 @@ ruleset(name="graylog") {
     StreamDriver="gtls"
     StreamDriverMode="1"
     StreamDriverAuthMode="x509/name"
-    StreamDriverPermittedPeers="graylog.cetera.ru"
+    StreamDriverPermittedPeers="graylog.example.com"
     TCP_FrameDelimiter="0"
   )
 }
@@ -102,7 +102,7 @@ template(name="gelf-ext" type="list") {
 ruleset(name="graylog-ext") {
   action(
     type="omfwd"
-    Target="graylog.cetera.ru"
+    Target="graylog.example.com"
     Port="12201"
     Protocol="tcp"
     KeepAlive="on"
@@ -110,7 +110,7 @@ ruleset(name="graylog-ext") {
     StreamDriver="gtls"
     StreamDriverMode="1"
     StreamDriverAuthMode="x509/name"
-    StreamDriverPermittedPeers="graylog.cetera.ru"
+    StreamDriverPermittedPeers="graylog.example.com"
     TCP_FrameDelimiter="0"
   )
 }
