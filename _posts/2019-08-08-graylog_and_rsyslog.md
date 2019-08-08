@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Rsyslog и Graylog
+description: Как с помощью rsyslog сливать логи в graylog и не облажаться.
 categories: [devops]
 tags: [rsyslog, graylog, logging]
 language: ru
