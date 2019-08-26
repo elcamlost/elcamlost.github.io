@@ -266,6 +266,7 @@ version=2
 
 type=@value:%..:char-to:,%
 type=@value:"%..:char-to:"%"
+type=@value:%..:rest%
 
 prefix= %-:word% %-:word% [error] %-:number%#%-:number%: *%-:word% 
 
@@ -294,7 +295,7 @@ rule=gelf,nginx,error:%full_message:string-to{"extradata":", client:"}%, %
     }%
 ```
 * 
-* We created a new liblognorm user type here - **@value**. This is any char sequence ended with comma or double quote. етс запятой или двойной кавычкой. 
+* We created a new liblognorm user type here - **@value**. This is any char sequence ended with comma or double quote or end of string. 
 * Prefix liblognorm pragma is used to define common prefix for several rules. It helps to reduce rule length.
 * Pay attention to [space symbol](https://www.rsyslog.com/log-normalization-and-the-leading-space/) at the start of the rule.
 * And (my favourite) we used **repeat** parser. It can extract fields inside a loop. Nginx adds meta fields in the end of the message and the list of fields may vary. For example, not every request is processed by upstream server, so upstream may be omitted.
